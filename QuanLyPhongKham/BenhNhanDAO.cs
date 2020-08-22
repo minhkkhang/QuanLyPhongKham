@@ -11,7 +11,7 @@ namespace QuanLyPhongKham
         public static bool removeBenhNhan(String CMND)
         {
             BenhNhan benhnhan = null;
-            using(var context=new PhongKhamEntities())
+            using(var context=new DataModel())
             {
                 benhnhan = context.BenhNhans.Find(CMND);
                 context.BenhNhans.Remove(benhnhan);
@@ -30,7 +30,7 @@ namespace QuanLyPhongKham
             if (CMND != benhnhan.CMND) return -1;
             BenhNhan bn = null;
             int res = 0;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 bn = context.BenhNhans.Find(CMND);
                 if (bn == null)
@@ -46,7 +46,7 @@ namespace QuanLyPhongKham
         public static BenhNhan getBenhNhan(String CMND)
         {
             BenhNhan bn = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 bn = context.BenhNhans.Find(CMND);
             }

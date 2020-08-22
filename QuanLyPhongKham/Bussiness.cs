@@ -242,10 +242,11 @@ namespace QuanLyPhongKham
             LuotKham lk = LuotKhamDAO.getLuotKham(ID);
             if (lk == null) return;
             lk.Benh = benh;
-            foreach (LuotThuoc lt in lk.LuotThuocs)
+            LuotKhamDAO.updateLuotKham(ID, lk);
+            /*foreach (LuotThuoc lt in lk.LuotThuocs)
             {
                 LuotKhamDAO.updateLuotKham(ID,lk);
-            }
+            }*/
         }
 
         public static void addLuotThuoc(string thuoc,int soLuong)
@@ -271,7 +272,7 @@ namespace QuanLyPhongKham
                     {
                         lk.TienThuoc += soLuong * ThuocDAO.getThuoc(thuoc).DonGia;
                         LuotKhamDAO.updateLuotKham(lk.ID, lk);
-                        updateLuotThuoc(lth.ID, (int)lth.SoLuong + soLuong);
+                        updateLuotThuoc(lth.ID, soLuong);
                         return;
                     }
                 }
@@ -281,7 +282,8 @@ namespace QuanLyPhongKham
             lt.LuotKham = currentLuotKhamID;
             lt.SoLuong = soLuong;
             lt.Thuoc = thuoc;
-            lk.TienThuoc += lt.SoLuong * ThuocDAO.getThuoc(thuoc).DonGia;
+            lt.ChiPhi= lt.SoLuong * ThuocDAO.getThuoc(thuoc).DonGia;
+            lk.TienThuoc += lt.ChiPhi;
             listLuotThuoc.Add(lt);
             LuotKhamDAO.updateLuotKham(lk.ID, lk);
             LuotThuocDAO.addLuotThuoc(lt);
@@ -294,7 +296,7 @@ namespace QuanLyPhongKham
 
             LuotThuoc lt = LuotThuocDAO.getLuotThuoc(ID);
             if (lt == null) return false;
-            lk.TienThuoc -= lt.SoLuong * ThuocDAO.getThuoc(lt.Thuoc).DonGia;
+            lk.TienThuoc -= lt.ChiPhi;
             LuotKhamDAO.updateLuotKham(lk.ID, lk);
             foreach(LuotThuoc l in listLuotThuoc)
             {
@@ -308,7 +310,7 @@ namespace QuanLyPhongKham
             LuotThuocDAO.removeLuotThuoc(ID);
             return true;
         }
-        public static void updateLuotThuoc(int ID,int soLuong)
+        public static void updateLuotThuoc(int ID,int soLuongThem)
         {
             if (currentLuotKhamID == -1) return;
             LuotThuoc lt = LuotThuocDAO.getLuotThuoc(ID);
@@ -318,8 +320,10 @@ namespace QuanLyPhongKham
                 if (listLuotThuoc.ElementAt(i).ID == ID) index = i;
             }
             if (index == -1 || lt==null) return;
-            lt.SoLuong = soLuong;
-            listLuotThuoc.ElementAt(index).soluong2 = soLuong;
+            lt.SoLuong += soLuongThem;
+            lt.ChiPhi+= soLuongThem * ThuocDAO.getThuoc(lt.Thuoc).DonGia;
+            listLuotThuoc.ElementAt(index).soluong2 = (int)lt.SoLuong;
+            listLuotThuoc.ElementAt(index).chiphi2 = (double)lt.ChiPhi;
             LuotThuocDAO.updateLuotThuoc(ID, lt);
         }
         public static void getLichSuKham(string date)

@@ -11,7 +11,7 @@ namespace QuanLyPhongKham
         public static bool removeBenh(String loai)
         {
             Benh benh = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 benh = context.Benhs.Find(loai);
                 context.Benhs.Remove(benh);
@@ -30,7 +30,7 @@ namespace QuanLyPhongKham
             if (loai != benh.LoaiBenh) return -1;
             Benh b = null;
             int res = 0;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 b = context.Benhs.Find(loai);
                 if (b == null)
@@ -46,7 +46,7 @@ namespace QuanLyPhongKham
         public static Benh getBenh(String loai)
         {
             Benh b = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 b = context.Benhs.Find(loai);
             }
@@ -55,7 +55,7 @@ namespace QuanLyPhongKham
         public static IList<Benh> getAllList()
         {
             IList<Benh> result = new List<Benh>();
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 result = context.Benhs.ToList();
             }

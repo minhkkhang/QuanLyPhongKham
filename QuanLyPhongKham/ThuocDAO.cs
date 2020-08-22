@@ -11,7 +11,7 @@ namespace QuanLyPhongKham
         public static bool removeThuoc(String ten)
         {
             Thuoc thuoc = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 thuoc = context.Thuocs.Find(ten);
                 context.Thuocs.Remove(thuoc);
@@ -30,7 +30,7 @@ namespace QuanLyPhongKham
             if (ten != thuoc.TenThuoc) return -1;
             Thuoc t = null;
             int res = 0;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 t = context.Thuocs.Find(ten);
                 if (t == null)
@@ -46,7 +46,7 @@ namespace QuanLyPhongKham
         public static Thuoc getThuoc(String ten)
         {
             Thuoc t = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 t = context.Thuocs.Find(ten);
             }
@@ -56,7 +56,7 @@ namespace QuanLyPhongKham
         public static IList<Thuoc> getAllList()
         {
             IList<Thuoc> result = new List<Thuoc>();
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 result = context.Thuocs.ToList();
             }

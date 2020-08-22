@@ -238,8 +238,9 @@
                                 <ListView.View>
                                     <GridView >
                                         <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding id2}"/>
-                                        <GridViewColumn Header="Thuoc" Width="300" DisplayMemberBinding="{Binding thuoc2}" />
+                                        <GridViewColumn Header="Thuoc" Width="200" DisplayMemberBinding="{Binding thuoc2}" />
                                         <GridViewColumn Header="So luong" Width="60" DisplayMemberBinding="{Binding soluong2}" />
+                                        <GridViewColumn Header="Chi phi" Width="100" DisplayMemberBinding="{Binding chiphi2}" />
                                     </GridView>
                                 </ListView.View>
                             </ListView>

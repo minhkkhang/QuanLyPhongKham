@@ -11,7 +11,7 @@ namespace QuanLyPhongKham
         public static bool addLuotKham(LuotKham lk)
         {
             bool res = false;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 if (getLuotKhamBaseOnDateAndPatient(lk.NgayKham, lk.BenhNhan) == null)
                 {
@@ -30,7 +30,7 @@ namespace QuanLyPhongKham
         public static bool removeLuotKham(int ID)
         {
             LuotKham lk = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 lk = context.LuotKhams.Find(ID);
                 context.LuotKhams.Remove(lk);
@@ -43,7 +43,7 @@ namespace QuanLyPhongKham
         {
             if (ID != lk.ID) return;
             LuotKham l = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 l = context.LuotKhams.Find(ID);
                 if (l == null)
@@ -57,7 +57,7 @@ namespace QuanLyPhongKham
         public static LuotKham getLuotKham(int ID)
         {
             LuotKham lk = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 lk = context.LuotKhams
                     .Include("BenhNhan1")
@@ -70,7 +70,7 @@ namespace QuanLyPhongKham
         public static int getLatestID()
         {
             int res = 0;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 if (context.LuotKhams.ToList().Any())
                 {
@@ -83,7 +83,7 @@ namespace QuanLyPhongKham
         {
             string date = DateTime.Now.ToString("dd/MM/yyyy");
             IList<LuotKham> res = new List<LuotKham>();
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 try
                 {
@@ -98,7 +98,7 @@ namespace QuanLyPhongKham
         {
             LuotKham lk = null;
             IList<LuotKham> list = new List<LuotKham>();
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 list = context.LuotKhams
                     .Include("BenhNhan1")
@@ -113,7 +113,7 @@ namespace QuanLyPhongKham
         public static IList<LuotKham> getLuotKhamOfDate(string date)
         {
             IList<LuotKham> res = new List<LuotKham>();
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 res = context.LuotKhams.Include("BenhNhan1")
                         .Where(s => s.NgayKham.Equals(date))
@@ -124,7 +124,7 @@ namespace QuanLyPhongKham
         public static IList<LuotKham> getLuotKhamOfMonth(string month)
         {
             IList<LuotKham> res = new List<LuotKham>();
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 res = context.LuotKhams.Where(s => s.NgayKham.Substring(3).Equals(month)).ToList();
             }

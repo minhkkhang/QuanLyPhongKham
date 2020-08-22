@@ -10,7 +10,7 @@ namespace QuanLyPhongKham
     {
         public static void addLuotThuoc(LuotThuoc lt)
         {
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 context.LuotThuocs.Add(lt);
                 context.SaveChanges();
@@ -20,7 +20,7 @@ namespace QuanLyPhongKham
         public static bool removeLuotThuoc(int ID)
         {
             LuotThuoc lt = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 lt = context.LuotThuocs.Find(ID);
                 context.LuotThuocs.Remove(lt);
@@ -33,7 +33,7 @@ namespace QuanLyPhongKham
         {
             if (ID != lt.ID) return;
             LuotThuoc l = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 l = context.LuotThuocs.Find(ID);
                 if (l == null)
@@ -47,7 +47,7 @@ namespace QuanLyPhongKham
         public static LuotThuoc getLuotThuoc(int ID)
         {
             LuotThuoc lt = null;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 lt = context.LuotThuocs.Include("LuotKham1")
                     .Include("Thuoc1").Where(s => s.ID==ID).FirstOrDefault();
@@ -57,7 +57,7 @@ namespace QuanLyPhongKham
         public static int getLatestID()
         {
             int res = 0;
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 if (context.LuotThuocs.ToList().Any())
                 {
@@ -69,7 +69,7 @@ namespace QuanLyPhongKham
         public static IList<LuotThuoc> getLuotThuocOfMonth(string month)
         {
             IList<LuotThuoc> res = new List<LuotThuoc>();
-            using (var context = new PhongKhamEntities())
+            using (var context = new DataModel())
             {
                 res = context.LuotThuocs.Include("LuotKham1")
                     .Include("Thuoc1").Where(s => s.LuotKham1.NgayKham.Substring(3).Equals(month)).ToList();

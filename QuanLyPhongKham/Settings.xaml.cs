@@ -33,6 +33,11 @@ namespace QuanLyPhongKham
         private void ThemDonViTxt_Click(object sender, RoutedEventArgs e)
         {
             if (DonViTxt.Text.ToString().Equals("")) return;
+            if (Bussiness.donViThuoc.Contains(DonViTxt.Text.ToString()))
+            {
+                MessageBox.Show("Loai don vi thuoc nay da ton tai!");
+                return;
+            }
             Bussiness.donViThuoc.Add(DonViTxt.Text.ToString());
             Bussiness.saveSettings();
             DonViTxt.Text = "";
@@ -42,6 +47,11 @@ namespace QuanLyPhongKham
         private void ThemTrieuChungTxt_Click(object sender, RoutedEventArgs e)
         {
             if (TrieuChungTxt.Text.ToString().Equals("")) return;
+            if (Bussiness.trieuChung.Contains(TrieuChungTxt.Text.ToString()))
+            {
+                MessageBox.Show("Loai trieu chung nay da ton tai!");
+                return;
+            }
             Bussiness.trieuChung.Add(TrieuChungTxt.Text.ToString());
             Bussiness.saveSettings();
             CheckBox box = new CheckBox();

@@ -149,7 +149,7 @@ namespace QuanLyPhongKham
                     builder.Append(" - ");
                     builder.Append(lt.SoLuong + " " + thuoc.DonVi);
                     builder.Append(" - ");
-                    builder.Append(thuoc.DonGia * lt.SoLuong + "VND");
+                    builder.Append(lt.ChiPhi + "VND");
                     builder.Append(Environment.NewLine);
                 }
                 builder.Append("---------------------------" + Environment.NewLine);
@@ -264,7 +264,7 @@ namespace QuanLyPhongKham
             if (dialog.ShowDialog() == true)
             {
                 int res = Bussiness.addOrUpdateBenh(benh.LoaiBenh, benh.TrieuChung);
-                benhs.Add(benh.LoaiBenh);
+                if(res==1)benhs.Add(benh.LoaiBenh);
             }
         }
 
@@ -316,6 +316,8 @@ namespace QuanLyPhongKham
                 Thuoc thuoc = ThuocDAO.getThuoc(lt.Thuoc);
                 builder.Append(" - ");
                 builder.Append(lt.SoLuong + " "+thuoc.DonVi);
+                builder.Append(" - ");
+                builder.Append(lt.ChiPhi + " VND");
                 builder.Append(Environment.NewLine);
             }
             TextDialog dialog = new TextDialog("Toa thuoc",builder.ToString());
