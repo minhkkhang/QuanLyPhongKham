@@ -1,0 +1,455 @@
+﻿<Window x:Class="QuanLyPhongKham.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyPhongKham"
+        mc:Ignorable="d"
+        Title="Quan ly phong kham" Height="600" Width="1200">
+    <DockPanel >
+        <Grid Name ="TopMenu" Background="Blue" DockPanel.Dock="Top">
+            <ToolBarTray>
+                <ToolBar>
+                    <Button Margin="2" Name="SettingsBtn" Click="SettingsBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="./Images/gear.png" Margin="5" RenderOptions.BitmapScalingMode="HighQuality"
+                                   Width="24" Height="24"></Image>
+                            <TextBlock Text="Settings" VerticalAlignment="Center" Margin="5"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator Width="2"/>
+                    <Button Margin="2" Name="HelpBtn" Click="HelpBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="./Images/Helpbook3d.png" Margin="5" RenderOptions.BitmapScalingMode="HighQuality"></Image>
+                            <TextBlock Text="Help" VerticalAlignment="Center" Margin="5"></TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Margin="2" Name="ThemThuocBtn" Click="ThemThuocBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="./Images/drug.png" Margin="5" RenderOptions.BitmapScalingMode="HighQuality"
+                                   Width="24" Height="24"></Image>
+                            <TextBlock Text="Loai thuoc" VerticalAlignment="Center" Margin="5"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator/>
+                    <Button Margin="2" Name="ThemBenhBtn" Click="ThemBenhBtn_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="./Images/virus.png" Margin="5" RenderOptions.BitmapScalingMode="HighQuality"
+                                   Width="24" Height="24"></Image>
+                            <TextBlock Text="Loai benh" VerticalAlignment="Center" Margin="5"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator Width="2"/>
+                </ToolBar>
+            </ToolBarTray>
+            <Line Stroke="Black" StrokeThickness="2"/>
+        </Grid>
+        <Grid Name="Khang"  DockPanel.Dock="Left" MinWidth="400">
+            <WrapPanel Orientation="Vertical" MinWidth="400">
+                <ToolBar MinWidth="400" Height="50">
+                    <ToolBarTray>
+                    </ToolBarTray>
+                </ToolBar>
+
+                <TabControl Name="ActionTabControl" MinWidth="400" >
+                    <TabItem IsSelected="True" Name="ThemLuotThuocTab">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image  Source="Images/Lightning.png" Width="30" Height="30" Margin="0,0,5,0"
+                                RenderOptions.BitmapScalingMode="HighQuality"/>
+                                <TextBlock Text="Them thuoc" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <DockPanel>
+
+
+
+                            <ListView Name="ThemThuocListView" DockPanel.Dock="Top">
+
+                                <ListView.Resources>
+                                    <Style TargetType="ListViewItem">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                                <Setter Property="IsSelected" Value="True"/>
+                                            </Trigger>
+
+                                            <Trigger Property="IsSelected" Value="True" >
+                                                <Setter Property="FontWeight" Value="Bold" />
+                                                <Setter Property="Background" Value="Red" />
+                                                <Setter Property="Foreground" Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+                                </ListView.Resources>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <StackPanel Focusable="False" >
+
+                                            <Button Width="400" Height="30" HorizontalContentAlignment="Left" Click="Button_Click">
+
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <Button Content="+"
+                                                Width="20" Margin="0,0,10,0"></Button>
+
+                                                    <TextBlock 
+                                            Text="{Binding TenThuoc}" 
+                                            HorizontalAlignment="Center"></TextBlock>
+
+                                                </StackPanel>
+
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
+                        </DockPanel>
+                    </TabItem>
+
+                    <TabItem Name="TrieuChungTab">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image  Source="Images/virus.png" Width="30" Height="30" Margin="0,0,5,0"
+                                RenderOptions.BitmapScalingMode="HighQuality"/>
+                                <TextBlock Text="Chan doan" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <DockPanel>
+                            <StackPanel Orientation="Vertical" Margin="10 5">
+                                <ScrollViewer MaxHeight="200" Padding="10 5">
+                                    <StackPanel Orientation="Vertical" Width="335" Name="TrieuChungCheckBoxes">
+                                    </StackPanel>
+                                </ScrollViewer>
+
+                                <StackPanel Orientation="Vertical" Height="32" Margin="15 5">
+                                    <Button Name="ChanDoanBenhBtn" Click="ChanDoanBenhBtn_Click"
+                                            Padding="5" HorizontalAlignment="Right">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="Images/Add.png" 
+                                            Width="20" Height="20" Margin="0,0,5,0"
+                                            RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            <TextBlock Text="Chan doan benh" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                                <TextBlock Name="ChanDoanBenhTextBlock" Padding="15 5"
+                                           TextWrapping="Wrap" MaxHeight="170" Width="370" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+
+                        </DockPanel>
+                    </TabItem>
+
+
+                    <TabItem IsEnabled="False" Name="ThongTinLuotKhamTab">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image  Source="Images/List.png" Width="30" Height="30" Margin="0,0,5,0"
+                                RenderOptions.BitmapScalingMode="HighQuality"/>
+                                <TextBlock Text="Thong tin ca kham" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TabItem.Header>
+
+                        <DockPanel Height="420">
+                            <StackPanel DockPanel.Dock="Top" MinHeight="230" MaxHeight="285"
+                                        Margin="0,0,0,5" Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" Height="35" Margin="10 5">
+                                    <Label Name="LuotKhamIDLabel" Content="ID: " FontSize="15" Foreground="Red"
+                                           FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="35" Margin="10 5">
+                                    <Label Content="Nguoi dung: " FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Name="UserInfoTxtBlock"  Width="210" TextWrapping="Wrap" 
+                                               VerticalAlignment="Center"/>
+                                    <Button Name="UpdateUserInfoBtn" Click="UpdateUserInfoBtn_Click" Margin="10 0 0 0"
+                                            Padding="5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="Images/user.png" 
+                                            Width="20" Height="20" Margin="0,0,5,0"
+                                            RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            <TextBlock Text="Benh nhan" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="25" Margin="10 5">
+                                    <Label Content="Benh: " FontWeight="Bold"/>
+                                    <ComboBox Width="200" Name="BenhComboBox" Margin="5 0 0 0" SelectionChanged="BenhComboBox_SelectionChanged">
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"  Margin="10 5">
+                                    <Label Content="Trieu chung:" FontWeight="Bold"/>
+                                    <ScrollViewer MaxHeight="70">
+                                        <TextBlock Name="TrieuChungTxtBlock" Text=""
+                                               TextWrapping="Wrap" Width="318" Padding="0 5 0 0"/>
+                                    </ScrollViewer>
+                                    
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="25" Margin="15 5">
+                                    <TextBlock Name="TienKhamTxtBlock" Text="Tien kham: " FontWeight="Bold"/>
+                                    <Separator Margin="5 0"/>
+                                    <TextBlock Name="TienThuocTxtBlock" Text="Tien thuoc: " FontWeight="Bold"/>
+                                    <Separator Margin="5 0"/>
+                                    <TextBlock Name="TongChiPhiTxtBlock" Text="Tong chi phi: " Foreground="Red" FontWeight="Bold"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Height="32" Margin="15 5">
+                                    <StackPanel Width="305" />
+                                    <Button Name="AddLuotThuocBtn" Click="AddLuotThuocBtn_Click"
+                                            Padding="5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="Images/Add.png" 
+                                            Width="20" Height="20" Margin="0,0,5,0"
+                                            RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            <TextBlock Text="Them thuoc" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+
+                            </StackPanel>
+                            
+                            <ListView Name="LuotThuocListView"
+                                    DockPanel.Dock="Bottom" Height="135"
+                                      SelectedIndex="-1" HorizontalAlignment="Center"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                  ScrollViewer.CanContentScroll="False">
+                                <ListView.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="See detail" Name="SeeDetailBtn" Click="SeeDetailBtn_Click" >
+                                            <MenuItem.Icon>
+                                                <Image Source="Images/drug.png" 
+                                            RenderOptions.BitmapScalingMode="HighQuality" Width="16" Height="16"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        
+                                        <MenuItem Header="Remove" Click="MenuItem_Click" >
+                                            <MenuItem.Icon>
+                                                <Image Source="Images/Delete.png" 
+                                            RenderOptions.BitmapScalingMode="HighQuality" Width="16" Height="16"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
+
+                                <ListView.View>
+                                    <GridView >
+                                        <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding id2}"/>
+                                        <GridViewColumn Header="Thuoc" Width="300" DisplayMemberBinding="{Binding thuoc2}" />
+                                        <GridViewColumn Header="So luong" Width="60" DisplayMemberBinding="{Binding soluong2}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </DockPanel>
+                    </TabItem>
+                </TabControl>
+            </WrapPanel>
+        </Grid>
+        <DockPanel DockPanel.Dock="Right">
+            <TabControl >
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="./Images/Text.gif" RenderOptions.BitmapScalingMode="HighQuality"></Image>
+                            <TextBlock Name="DanhSachCaKham" Text="Danh sach ca kham" Margin="10" FontWeight="Bold" FontSize="15"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <DockPanel>
+                        <ToolBarTray DockPanel.Dock="Top">
+                            <ToolBar>
+                                <Button Name="ThemBenhNhanBtn" Click="ThemBenhNhanBtn_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="./Images/Create.gif" Margin="5" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        <TextBlock Text="Add" Margin="5"  VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Separator/>
+                                <Button Name="KhamBenhBtn" Click="KhamBenhBtn_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="./Images/Text.gif" RenderOptions.BitmapScalingMode="HighQuality" Height="36"></Image>
+                                        <TextBlock Text="Kham benh" Margin="5"  VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Margin="2" Name="HoaDonBtn" Click="HoaDonBtn_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="./Images/bill.png" Margin="5" RenderOptions.BitmapScalingMode="HighQuality" Height="36" Width="36"></Image>
+                                        <TextBlock Text="In hoa don" Margin="5"  VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </ToolBar>
+                        </ToolBarTray>
+
+                        <ListView Name="DSLuotKhamListView" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                  ScrollViewer.CanContentScroll="False"
+                                  HorizontalAlignment="Center"
+                                  >
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Remove" Click="LuotKhamRemoveBtn_Click" Name="LuotKhamRemoveBtn" >
+                                        <MenuItem.Icon>
+                                            <Image Source="Images/Delete.png" 
+                                            RenderOptions.BitmapScalingMode="HighQuality" Width="16" Height="16"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="CMND" Width="130" DisplayMemberBinding="{Binding cmnd1}" />
+                                    <GridViewColumn Header="Ho ten" Width="210" DisplayMemberBinding="{Binding hoten1}" />
+                                    <GridViewColumn Header="SDT" Width="130" DisplayMemberBinding="{Binding sdt1}" />
+                                    <GridViewColumn Header="Dia chi" Width="250" DisplayMemberBinding="{Binding diachi1}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="./Images/clock.png" RenderOptions.BitmapScalingMode="HighQuality" Height="24" Width="24"/>
+                            <TextBlock  Name="LichSuKham" Text="Lich su kham" Margin="10" FontWeight="Bold" FontSize="15"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+                    <DockPanel>
+                        <ToolBarTray DockPanel.Dock="Top">
+                            <ToolBar>
+                                <TextBlock Text="Ngay (dd/MM/yyyy): " TextAlignment="Center" VerticalAlignment="Center"/>
+                                <Separator/>
+                                <TextBox Name="LichSuKhamTextBox" Width="200" KeyDown="LichSuKhamTextBox_KeyDown"/>
+                                <Button Name="LichSuKhamBtn" Click="LichSuKhamBtn_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="./Images/preview_icon.png" RenderOptions.BitmapScalingMode="HighQuality" Height="39"></Image>
+                                        <TextBlock Text="Xem" Margin="5"  VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Button>
+                            </ToolBar>
+                        </ToolBarTray>
+
+                        <ListView Name="LichSuKhamListView" HorizontalAlignment="Center">
+
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Xem benh nhan" Click="LichSuXemBNBtn_Click" Name="LichSuXemBNBtn" >
+                                        <MenuItem.Icon>
+                                            <Image Source="Images/user.png" 
+                                            RenderOptions.BitmapScalingMode="HighQuality" Width="16" Height="16"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+
+                                    <MenuItem Header="Xem benh" Click="LichSuXemBenhBtn_Click"  Name="LichSuXemBenhBtn" >
+                                        <MenuItem.Icon>
+                                            <Image Source="Images/virus.png" 
+                                            RenderOptions.BitmapScalingMode="HighQuality" Width="16" Height="16"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+
+                                    <MenuItem Header="Xem thuoc" Click="LichSuXemThuocBtn_Click"  Name="LichSuXemThuocBtn" >
+                                        <MenuItem.Icon>
+                                            <Image Source="Images/drug.png" 
+                                            RenderOptions.BitmapScalingMode="HighQuality" Width="16" Height="16"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="ID" Width="70" DisplayMemberBinding="{Binding ID}" />
+                                    <GridViewColumn Header="Ngay" Width="170" DisplayMemberBinding="{Binding NgayKham}" />
+                                    <GridViewColumn Header="CMND" Width="170" DisplayMemberBinding="{Binding BenhNhan}" />
+                                    <GridViewColumn Header="Benh" Width="170" DisplayMemberBinding="{Binding Benh}" />
+                                    <GridViewColumn Header="Chi phi" Width="150" DisplayMemberBinding="{Binding ChiPhi}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="./Images/graphic.png" RenderOptions.BitmapScalingMode="HighQuality" Height="24"
+                                   Width="24"/>
+                            <TextBlock  Name="ThongKeDoanhThu" Text="Thong ke doanh thu" Margin="10" FontWeight="Bold" FontSize="15"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+                    <DockPanel>
+                        <ToolBarTray DockPanel.Dock="Top">
+                            <ToolBar>
+                                <TextBlock Text="Thang (MM/yyyy): " TextAlignment="Center" VerticalAlignment="Center"/>
+                                <Separator/>
+
+                                <TextBox Name="ThongKeDoanhThuTextBox" Width="200" KeyDown="ThongKeDoanhThuTextBox_KeyDown"/>
+                                <Button Name="ThongKeDoanhThuBtn" Click="ThongKeDoanhThuBtn_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="./Images/preview_icon.png" RenderOptions.BitmapScalingMode="HighQuality" Height="39"></Image>
+                                        <TextBlock Text="Xem" Margin="5"  VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Button>
+                                <TextBlock Name="DoanhThuThangTxtBlock" VerticalAlignment="Center"
+                                           Margin="30 0 0 0"/>
+                            </ToolBar>
+                        </ToolBarTray>
+
+                        <ListView Name="ThongKeDoanhThuListView" HorizontalAlignment="Center">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Ngay" Width="170" DisplayMemberBinding="{Binding date}" />
+                                    <GridViewColumn Header="So benh nhan" Width="150" DisplayMemberBinding="{Binding soBenhNhan}" />
+                                    <GridViewColumn Header="Doanh thu" Width="200" DisplayMemberBinding="{Binding doanhThu}" />
+                                    <GridViewColumn Header="Ty le(%)" Width="200" DisplayMemberBinding="{Binding tyLe}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="./Images/graphic.png" RenderOptions.BitmapScalingMode="HighQuality"
+                                   Width="24" Height="24"/>
+                            <TextBlock  Name="ThongKeThuoc" Text="Thong ke thuoc" Margin="10" FontWeight="Bold" FontSize="15"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+                    <DockPanel>
+                        <ToolBarTray DockPanel.Dock="Top">
+                            <ToolBar>
+                                <TextBlock Text="Thang (MM/yyyy): " TextAlignment="Center" VerticalAlignment="Center"/>
+                                <Separator/>
+
+                                <TextBox Name="ThongKeThuocTextBox" Width="200" KeyDown="ThongKeThuocTextBox_KeyDown"/>
+                                <Button Name="ThongKeThuocBtn" Click="ThongKeThuocBtn_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="./Images/preview_icon.png" RenderOptions.BitmapScalingMode="HighQuality" Height="39"></Image>
+                                        <TextBlock Text="Xem" Margin="5"  VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Button>
+                            </ToolBar>
+                        </ToolBarTray>
+
+                        <ListView Name="ThongKeThuocListView" HorizontalAlignment="Center">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Ten thuoc" Width="240" DisplayMemberBinding="{Binding tenThuoc}" />
+                                    <GridViewColumn Header="So luong" Width="240" DisplayMemberBinding="{Binding soLuong}" />
+                                    <GridViewColumn Header="So lan dung" Width="240" DisplayMemberBinding="{Binding soLanDung}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </DockPanel>
+</Window>
